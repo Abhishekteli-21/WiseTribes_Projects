@@ -12,11 +12,11 @@ const IND = (lock: number, w = 600, h = 800) =>
 export const site = {
   name: "WiseTribes",
   tagline: "Learn AI. Build it. Show it off.",
-  instagram: "https://instagram.com/wisetribes",
-  instagramHandle: "@wisetribes",
+  instagram: "https://www.instagram.com/wisetribes_26/",
+  instagramHandle: "@wisetribes_26",
   youtube: "https://youtube.com/@wisetribes",
-  whatsapp: "https://wa.me/910000000000", // ← replace with your WhatsApp number
-  url: "https://wisetribes.com",
+  whatsapp: "https://wa.me/919175066296",
+  url: "https://wisetribes.io",
   description:
     "Watch the reel, follow the full build on its own page, and make your own AI project. Post what you build and get featured on our site and Instagram stories.",
 };

@@ -7,9 +7,10 @@ import Icon from "./ui/Icon";
 import { site } from "@/lib/content";
 
 const links = [
-  { label: "Get featured", href: "/build#featured" },
-  { label: "Reels", href: "/build#reels" },
-  { label: "Projects", href: "/projects" },
+  { label: "Home", href: "https://wisetribes.io/", external: true },
+  { label: "Get featured", href: "/build#featured", external: false },
+  { label: "Reels", href: "/build#reels", external: false },
+  { label: "Projects", href: "/projects", external: false },
 ];
 
 export default function Navbar() {
@@ -39,9 +40,12 @@ export default function Navbar() {
       >
         {/* logo */}
         <a href="/build" className="flex items-center gap-2">
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-grad text-white">
-            <Icon name="spark" className="h-5 w-5" />
-          </span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/logo/logo.webp"
+            alt="WiseTribes"
+            className="h-9 w-9 rounded-xl object-contain"
+          />
           <span className="font-display text-lg font-bold tracking-tight">
             {site.name}
           </span>
@@ -53,6 +57,8 @@ export default function Navbar() {
             <a
               key={l.href}
               href={l.href}
+              target={l.external ? "_blank" : undefined}
+              rel={l.external ? "noopener noreferrer" : undefined}
               className="rounded-full px-4 py-2 text-sm font-medium text-muted transition-colors hover:text-ink"
             >
               {l.label}
@@ -98,6 +104,8 @@ export default function Navbar() {
             <a
               key={l.href}
               href={l.href}
+              target={l.external ? "_blank" : undefined}
+              rel={l.external ? "noopener noreferrer" : undefined}
               onClick={() => setOpen(false)}
               className="block rounded-2xl px-4 py-3 text-base font-medium text-ink hover:bg-surface"
             >
