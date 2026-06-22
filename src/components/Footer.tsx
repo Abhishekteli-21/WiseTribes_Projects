@@ -57,9 +57,12 @@ export default function Footer() {
         <div className="grid grid-cols-2 gap-8 border-t border-white/10 py-12 sm:grid-cols-4">
           <div className="col-span-2 sm:col-span-1">
             <div className="flex items-center gap-2">
-              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-grad text-white">
-                <Icon name="spark" className="h-5 w-5" />
-              </span>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/logo/logo.webp"
+                alt="WiseTribes"
+                className="h-11 w-11 rounded-xl bg-white/95 object-contain p-1"
+              />
               <span className="font-display text-lg font-bold tracking-tight">
                 {site.name}
               </span>
