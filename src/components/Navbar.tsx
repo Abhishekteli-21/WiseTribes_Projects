@@ -44,7 +44,7 @@ export default function Navbar() {
           <img
             src="/images/logo/logo.webp"
             alt="WiseTribes"
-            className="h-9 w-9 rounded-xl object-contain"
+            className="h-14 w-14 rounded-xl object-contain"
           />
           <span className="font-display text-lg font-bold tracking-tight">
             {site.name}
