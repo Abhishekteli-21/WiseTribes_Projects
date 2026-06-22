@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local dev / claude
+.claude/
+assets/
+alternative code/
+voiceover-script.txt
