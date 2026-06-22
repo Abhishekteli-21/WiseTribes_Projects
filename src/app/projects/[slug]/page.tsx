@@ -81,7 +81,7 @@ export default async function ProjectPage({ params }: Params) {
             <div className="mt-8 grid items-stretch gap-6 lg:grid-cols-[1.6fr_1fr] lg:gap-8">
               <Reveal className="h-full">
                 <div className="grad-border h-full p-2 shadow-[0_30px_80px_-30px_rgba(79,70,229,0.4)]">
-                  <YouTubeEmbed id={project.youtubeId} title={project.title} />
+                  <YouTubeEmbed id={project.youtubeId} title={project.title} poster={project.image} />
                 </div>
               </Reveal>
 

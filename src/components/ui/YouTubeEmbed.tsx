@@ -8,12 +8,14 @@ import Icon from "./Icon";
 export default function YouTubeEmbed({
   id,
   title,
+  poster: customPoster,
 }: {
   id: string;
   title: string;
+  poster?: string;
 }) {
   const [playing, setPlaying] = useState(false);
-  const poster = `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
+  const poster = customPoster ?? `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
 
   return (
     <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-ink">
