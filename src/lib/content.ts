@@ -120,7 +120,7 @@ export const projects: Project[] = [
     category: "Computer Vision",
     difficulty: "Beginner",
     duration: "Under 10 min",
-    youtubeId: "dQw4w9WgXcQ",
+    youtubeId: "aircAruvnKk",
     image: "/images/projects/coding-dark-laptop.png",
     prompt:
       "Create a single, self-contained HTML file — an AI Air-Drawing App for WiseTribes.\n\n" +

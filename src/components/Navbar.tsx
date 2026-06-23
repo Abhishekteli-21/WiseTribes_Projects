@@ -7,7 +7,7 @@ import Icon from "./ui/Icon";
 import { site } from "@/lib/content";
 
 const links = [
-  { label: "Home", href: "https://wisetribes.io/", external: true },
+  { label: "Home", href: "https://wisetribes.io/", external: false },
   { label: "Get featured", href: "/build#featured", external: false },
   { label: "Reels", href: "/build#reels", external: false },
   { label: "Projects", href: "/projects", external: false },
