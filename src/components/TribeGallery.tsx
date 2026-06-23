@@ -8,7 +8,7 @@ import { galleryImages } from "@/lib/content";
 
 export default function TribeGallery() {
   return (
-    <section className="relative overflow-hidden bg-[#0a0e1a] py-20 text-white sm:py-28">
+    <section className="relative overflow-hidden bg-[#0a0e1a] py-12 text-white sm:py-28">
       {/* soft brand glow */}
       <div className="pointer-events-none absolute inset-0 opacity-50">
         <div className="absolute left-1/4 top-0 h-72 w-72 rounded-full bg-violet-brand/20 blur-3xl" />

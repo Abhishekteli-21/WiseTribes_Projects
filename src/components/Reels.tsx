@@ -34,7 +34,7 @@ export default function Reels() {
     trackRef.current?.scrollBy({ left: dir * 360, behavior: "smooth" });
 
   return (
-    <section id="reels" className="overflow-hidden bg-white py-16 sm:py-24">
+    <section id="reels" className="overflow-hidden bg-white py-10 sm:py-24">
       <Container>
         <div className="mb-10 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
           <div>

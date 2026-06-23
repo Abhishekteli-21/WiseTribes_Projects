@@ -6,7 +6,7 @@ const ANGLE = 360 / COUNT; // 22.5°
  *  spaced at any size, and it covers the full width via a fluid font size. */
 export default function CylinderText() {
   return (
-    <section className="relative grid place-items-center overflow-hidden bg-white pb-16 pt-24 sm:pb-20 sm:pt-32">
+    <section className="relative grid place-items-center overflow-hidden bg-white pb-10 pt-14 sm:pb-20 sm:pt-32">
       <div
         className="relative flex h-[240px] w-full items-center justify-center sm:h-[360px]"
         style={{ perspective: "1100px" }}

@@ -81,7 +81,7 @@ export default function Hero() {
         <div
           ref={ref}
           onMouseMove={onMove}
-          className="relative isolate flex min-h-[56vh] items-center overflow-hidden rounded-[1.75rem] bg-ink sm:min-h-[62vh] sm:rounded-[2.5rem]"
+          className="relative isolate flex min-h-0 items-center overflow-hidden rounded-[1.75rem] bg-ink sm:min-h-[62vh] sm:rounded-[2.5rem]"
         >
           {/* moving image wall */}
           <motion.div
@@ -105,14 +105,14 @@ export default function Hero() {
           {/* content */}
           <motion.div
             style={{ y: contentY, opacity: contentOpacity }}
-            className="relative w-full px-6 py-16 sm:px-12 sm:py-20 lg:px-16"
+            className="relative w-full px-5 py-8 sm:px-12 sm:py-20 lg:px-16"
           >
             <div className="max-w-2xl text-white">
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className="mb-6 flex w-fit items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white/90 backdrop-blur"
+                className="mb-3 flex w-fit items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-medium text-white/90 backdrop-blur sm:mb-6 sm:px-4 sm:py-1.5 sm:text-sm"
               >
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-pink-brand opacity-75" />
@@ -122,7 +122,7 @@ export default function Hero() {
               </motion.div>
 
               {/* dramatic per-word mask reveal */}
-              <h1 className="font-display text-5xl font-bold leading-[0.95] tracking-tight sm:text-7xl lg:text-8xl">
+              <h1 className="font-display text-[2rem] font-bold leading-[0.95] tracking-tight sm:text-7xl lg:text-8xl">
                 {headline.map((raw, i) => {
                   const emph = raw.startsWith("*") && raw.endsWith("*");
                   const word = emph ? raw.slice(1, -1) : raw;
@@ -156,21 +156,22 @@ export default function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.7 }}
               >
-                <p className="mt-5 max-w-md text-lg font-medium text-white/80">
+                <p className="mt-4 hidden max-w-md text-base font-medium text-white/80 sm:mt-5 sm:block sm:text-lg">
                   Managed by curiosity, built by you. WiseTribes turns the reels
                   you scroll past into real AI projects — follow the page
                   step-by-step, then post your version and get featured.
                 </p>
-                <div className="mt-8 flex flex-wrap items-center gap-3">
-                  <GradientButton href="/projects" size="lg">
+                <div className="mt-5 flex flex-wrap items-center gap-2 sm:mt-8 sm:gap-3">
+                  <GradientButton href="/projects" size="md">
                     <Icon name="spark" className="h-4 w-4" />
-                    Explore AI projects
+                    <span className="sm:hidden">Explore projects</span>
+                    <span className="hidden sm:inline">Explore AI projects</span>
                   </GradientButton>
                   <a
                     href={site.instagram}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full border border-white/40 px-7 py-4 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+                    className="hidden items-center gap-2 rounded-full border border-white/40 px-7 py-4 text-sm font-semibold text-white transition-colors hover:bg-white/10 sm:inline-flex"
                   >
                     <Icon name="instagram" className="h-4 w-4" />
                     Follow on Instagram

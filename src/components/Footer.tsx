@@ -17,18 +17,18 @@ export default function Footer() {
   );
 
   return (
-    <footer className="relative overflow-hidden bg-[#0a0e1a] pt-20 text-white">
+    <footer className="relative overflow-hidden bg-[#0a0e1a] pt-12 text-white sm:pt-20">
       {/* faint top hairline */}
       <span className="absolute inset-x-0 top-0 h-px bg-white/10" />
 
       <Container>
         {/* CTA */}
-        <div className="flex flex-col items-start justify-between gap-8 pb-16 sm:flex-row sm:items-end">
+        <div className="flex flex-col items-start justify-between gap-6 pb-10 sm:gap-8 sm:pb-16 sm:flex-row sm:items-end">
           <div className="max-w-2xl">
             <AnimatedText
               as="h2"
               text="The sky was never *the limit.*"
-              className="block font-display text-4xl font-bold leading-[1.02] tracking-tight sm:text-6xl"
+              className="block font-display text-3xl font-bold leading-[1.02] tracking-tight sm:text-6xl"
             />
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-white/65">
               It&apos;s just the beginning. Join a tribe of young makers learning

@@ -13,7 +13,7 @@ export default function Featured() {
   return (
     <section
       id="featured"
-      className="relative scroll-mt-24 overflow-hidden py-20 sm:py-28"
+      className="relative scroll-mt-24 overflow-hidden py-12 sm:py-28"
     >
       <Container>
         <div className="grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr]">

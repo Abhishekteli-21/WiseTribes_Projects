@@ -25,7 +25,7 @@ export default function ExploreBuilds() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden py-20 sm:py-28">
+    <section className="relative overflow-hidden py-12 sm:py-28">
       {/* full-bleed background image + overlay */}
       <div className="absolute inset-0 -z-10">
         <Img
