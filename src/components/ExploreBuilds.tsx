@@ -72,7 +72,7 @@ export default function ExploreBuilds() {
               key={p.slug}
               href={`/projects/${p.slug}`}
               draggable={false}
-              className="group relative block w-[260px] shrink-0 overflow-hidden rounded-3xl bg-ink sm:w-[320px]"
+              className="group relative block w-[220px] shrink-0 overflow-hidden rounded-3xl bg-ink sm:w-[320px]"
             >
               <div className="relative aspect-[4/5]">
                 <Img src={p.image} alt={p.title} />

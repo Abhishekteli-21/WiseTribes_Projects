@@ -71,39 +71,47 @@ export default function Featured() {
             </Reveal>
           </div>
 
-          {/* right: featured story cards */}
-          <div className="grid grid-cols-3 gap-3 sm:gap-4">
-            {featured.map((b, i) => (
-              <Reveal key={b.id} delay={i * 0.06}>
-                <motion.div
-                  whileHover={{ rotate: 0, y: -8, scale: 1.03 }}
-                  transition={{ type: "spring", stiffness: 280, damping: 18 }}
-                  style={{ rotate: i % 2 === 0 ? -3 : 3 }}
-                  className="group relative aspect-[9/16] overflow-hidden rounded-2xl bg-ink p-[2.5px]"
+          {/* right: featured story cards
+               Mobile  → horizontal swipe strip (breaks out of container padding)
+               Desktop → 3-col grid                                                */}
+          <div className="-mx-5 sm:mx-0">
+            <div className="no-scrollbar flex gap-3 overflow-x-auto px-5 pb-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:overflow-visible sm:px-0 sm:pb-0">
+              {featured.map((b, i) => (
+                <Reveal
+                  key={b.id}
+                  delay={i * 0.06}
+                  className="w-[40vw] min-w-[130px] max-w-[160px] shrink-0 sm:w-auto sm:max-w-none"
                 >
-                  {/* story-ring gradient frame */}
-                  <span className="absolute inset-0 rounded-2xl bg-grad opacity-90" />
-                  <div className="relative h-full w-full overflow-hidden rounded-[14px] bg-ink">
-                    <Img src={b.image} alt={`${b.name} — ${b.project}`} />
-                    <span className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/20" />
+                  <motion.div
+                    whileHover={{ rotate: 0, y: -8, scale: 1.03 }}
+                    transition={{ type: "spring", stiffness: 280, damping: 18 }}
+                    style={{ rotate: i % 2 === 0 ? -3 : 3 }}
+                    className="group relative aspect-[9/16] overflow-hidden rounded-2xl bg-ink p-[2.5px]"
+                  >
+                    {/* story-ring gradient frame */}
+                    <span className="absolute inset-0 rounded-2xl bg-grad opacity-90" />
+                    <div className="relative h-full w-full overflow-hidden rounded-[14px] bg-ink">
+                      <Img src={b.image} alt={`${b.name} — ${b.project}`} />
+                      <span className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/20" />
 
-                    <span className="absolute left-2 top-2 flex items-center gap-1 rounded-full bg-white/90 px-2 py-0.5 text-[10px] font-semibold text-ink backdrop-blur">
-                      <Icon name="spark" className="h-3 w-3 text-pink-brand" />
-                      Featured
-                    </span>
+                      <span className="absolute left-2 top-2 flex items-center gap-1 rounded-full bg-white/90 px-2 py-0.5 text-[10px] font-semibold text-ink backdrop-blur">
+                        <Icon name="spark" className="h-3 w-3 text-pink-brand" />
+                        Featured
+                      </span>
 
-                    <div className="absolute inset-x-0 bottom-0 p-2.5">
-                      <p className="text-[11px] font-bold leading-tight text-white">
-                        {b.project}
-                      </p>
-                      <p className="mt-0.5 truncate text-[10px] text-white/75">
-                        {b.handle}
-                      </p>
+                      <div className="absolute inset-x-0 bottom-0 p-2.5">
+                        <p className="text-[11px] font-bold leading-tight text-white">
+                          {b.project}
+                        </p>
+                        <p className="mt-0.5 truncate text-[10px] text-white/75">
+                          {b.handle}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                </motion.div>
-              </Reveal>
-            ))}
+                  </motion.div>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </div>
       </Container>

@@ -79,7 +79,7 @@ export default function Reels() {
             <div key={r.id} className="shrink-0">
               {/* gradient-ring card; fixed height crops the IG footer chrome */}
               <div className="rounded-[20px] bg-grad p-[2px] shadow-[0_30px_60px_-30px_rgba(0,0,0,0.8)]">
-                <div className="relative h-[530px] w-[330px] overflow-hidden rounded-[18px] bg-white">
+                <div className="relative h-[400px] w-[265px] overflow-hidden rounded-[18px] bg-white sm:h-[530px] sm:w-[330px]">
                   <blockquote
                     className="instagram-media"
                     data-instgrm-permalink={r.url}

@@ -65,7 +65,6 @@ export default function Hero() {
     my.set((e.clientY - r.top) / r.height - 0.5);
   };
 
-  // scroll parallax: content lifts & fades, image wall scales as you leave
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
@@ -76,14 +75,16 @@ export default function Hero() {
   const wallScale = useTransform(sp, [0, 1], [1, 1.14]);
 
   return (
-    <section className="px-4 pt-24 sm:pt-28" id="top">
+    <section className="pt-24 sm:px-4 sm:pt-28" id="top">
       <div className="mx-auto max-w-[88rem]">
+
+        {/* ── Dark image card ── */}
         <div
           ref={ref}
           onMouseMove={onMove}
-          className="relative isolate flex min-h-0 items-center overflow-hidden rounded-[1.75rem] bg-ink sm:min-h-[62vh] sm:rounded-[2.5rem]"
+          className="relative isolate flex h-[52vw] min-h-[160px] items-center overflow-hidden rounded-b-[1.75rem] bg-ink sm:h-auto sm:min-h-[62vh] sm:rounded-[2.5rem]"
         >
-          {/* moving image wall */}
+          {/* animated image wall */}
           <motion.div
             style={{ x, y, scale: wallScale }}
             className="pointer-events-none absolute inset-0 -z-10"
@@ -98,38 +99,42 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          {/* scrims for legible white text (left-weighted, like editorial heroes) */}
+          {/* gradient scrims */}
           <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-black/90 via-black/60 to-black/25" />
           <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-t from-black/70 via-transparent to-black/40" />
 
-          {/* content */}
+          {/* content overlay */}
           <motion.div
             style={{ y: contentY, opacity: contentOpacity }}
-            className="relative w-full px-5 py-8 sm:px-12 sm:py-20 lg:px-16"
+            className="relative w-full px-5 py-4 sm:px-12 sm:py-20 lg:px-16"
           >
             <div className="max-w-2xl text-white">
+              {/* badge */}
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className="mb-3 flex w-fit items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-medium text-white/90 backdrop-blur sm:mb-6 sm:px-4 sm:py-1.5 sm:text-sm"
+                className="mb-2 flex w-fit items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-2.5 py-1 text-[10px] font-medium text-white/90 backdrop-blur sm:mb-6 sm:gap-2 sm:px-4 sm:py-1.5 sm:text-sm"
               >
-                <span className="relative flex h-2 w-2">
+                <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-pink-brand opacity-75" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-grad" />
+                  <span className="relative inline-flex h-full w-full rounded-full bg-grad" />
                 </span>
-                New AI project every week · {site.instagramHandle}
+                <span className="sm:hidden">New project every week</span>
+                <span className="hidden sm:inline">
+                  New AI project every week · {site.instagramHandle}
+                </span>
               </motion.div>
 
-              {/* dramatic per-word mask reveal */}
-              <h1 className="font-display text-[2rem] font-bold leading-[0.95] tracking-tight sm:text-7xl lg:text-8xl">
+              {/* headline — compact on mobile */}
+              <h1 className="font-display text-[1.65rem] font-bold leading-[0.95] tracking-tight sm:text-7xl lg:text-8xl">
                 {headline.map((raw, i) => {
                   const emph = raw.startsWith("*") && raw.endsWith("*");
                   const word = emph ? raw.slice(1, -1) : raw;
                   return (
                     <span
                       key={i}
-                      className="mr-[0.22em] inline-block overflow-hidden align-bottom"
+                      className="mr-[0.18em] inline-block overflow-hidden align-bottom"
                     >
                       <motion.span
                         initial={{ y: "120%", rotate: 8, opacity: 0 }}
@@ -140,9 +145,7 @@ export default function Hero() {
                           ease: [0.16, 1, 0.3, 1],
                         }}
                         style={{ transformOrigin: "0% 100%" }}
-                        className={`inline-block ${
-                          emph ? "italic text-grad" : ""
-                        }`}
+                        className={`inline-block ${emph ? "italic text-grad" : ""}`}
                       >
                         {word}
                       </motion.span>
@@ -151,27 +154,28 @@ export default function Hero() {
                 })}
               </h1>
 
+              {/* paragraph + CTAs — desktop only (mobile version is below the card) */}
               <motion.div
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.7 }}
+                className="hidden sm:block"
               >
-                <p className="mt-4 hidden max-w-md text-base font-medium text-white/80 sm:mt-5 sm:block sm:text-lg">
+                <p className="mt-5 max-w-md text-lg font-medium text-white/80">
                   Managed by curiosity, built by you. WiseTribes turns the reels
                   you scroll past into real AI projects — follow the page
                   step-by-step, then post your version and get featured.
                 </p>
-                <div className="mt-5 flex flex-wrap items-center gap-2 sm:mt-8 sm:gap-3">
-                  <GradientButton href="/projects" size="md">
+                <div className="mt-8 flex flex-wrap items-center gap-3">
+                  <GradientButton href="/projects" size="lg">
                     <Icon name="spark" className="h-4 w-4" />
-                    <span className="sm:hidden">Explore projects</span>
-                    <span className="hidden sm:inline">Explore AI projects</span>
+                    Explore AI projects
                   </GradientButton>
                   <a
                     href={site.instagram}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hidden items-center gap-2 rounded-full border border-white/40 px-7 py-4 text-sm font-semibold text-white transition-colors hover:bg-white/10 sm:inline-flex"
+                    className="inline-flex items-center gap-2 rounded-full border border-white/40 px-7 py-4 text-sm font-semibold text-white transition-colors hover:bg-white/10"
                   >
                     <Icon name="instagram" className="h-4 w-4" />
                     Follow on Instagram
@@ -181,7 +185,7 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          {/* scroll cue */}
+          {/* scroll cue — desktop only */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -198,6 +202,35 @@ export default function Hero() {
             </span>
           </motion.div>
         </div>
+
+        {/* ── Mobile-only: paragraph + CTAs below the card ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="px-5 pb-2 pt-5 sm:hidden"
+        >
+          <p className="text-[0.95rem] leading-relaxed text-muted">
+            Managed by curiosity, built by you. WiseTribes turns the reels
+            you scroll past into real AI projects.
+          </p>
+          <div className="mt-4 flex flex-wrap items-center gap-3">
+            <GradientButton href="/projects" size="md">
+              <Icon name="spark" className="h-4 w-4" />
+              Explore AI projects
+            </GradientButton>
+            <a
+              href={site.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-line px-5 py-3 text-sm font-semibold text-ink transition-colors hover:bg-surface"
+            >
+              <Icon name="instagram" className="h-4 w-4" />
+              Follow
+            </a>
+          </div>
+        </motion.div>
+
       </div>
     </section>
   );
