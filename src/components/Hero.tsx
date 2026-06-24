@@ -81,14 +81,14 @@ export default function Hero() {
   const wallScale = useTransform(sp, [0, 1], [1, 1.14]);
 
   return (
-    <section className="overflow-hidden pt-24 sm:px-4 sm:pt-28" id="top">
+    <section className="overflow-hidden px-3 pt-24 sm:px-4 sm:pt-28" id="top">
       <div className="mx-auto max-w-[88rem] overflow-hidden">
 
         {/* ── Dark image card ── */}
         <div
           ref={ref}
           onMouseMove={onMove}
-          className="relative isolate flex h-[52vw] min-h-[160px] items-center overflow-hidden rounded-b-[1.75rem] bg-ink [contain:paint] sm:h-auto sm:min-h-[62vh] sm:rounded-[2.5rem]"
+          className="relative isolate flex h-[52vw] min-h-[160px] items-center overflow-hidden rounded-[1.75rem] bg-ink [contain:paint] sm:h-auto sm:min-h-[62vh] sm:rounded-[2.5rem]"
         >
           {/* animated image wall — parallax disabled on mobile */}
           <motion.div
