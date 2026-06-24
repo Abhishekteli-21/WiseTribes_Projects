@@ -75,11 +75,13 @@ export default function Featured() {
                Mobile  → horizontal swipe strip (breaks out of container padding)
                Desktop → 3-col grid                                                */}
           <div className="-mx-5 min-w-0 sm:mx-0">
-            <div className="no-scrollbar flex gap-3 overflow-x-auto px-5 pb-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:overflow-visible sm:px-0 sm:pb-0">
+            <div
+              className="no-scrollbar flex gap-3 overflow-x-auto px-5 pb-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:overflow-visible sm:px-0 sm:pb-0"
+              style={{ touchAction: "pan-x" }}
+            >
               {featured.map((b, i) => (
-                <Reveal
+                <div
                   key={b.id}
-                  delay={i * 0.06}
                   className="w-[40vw] min-w-[130px] max-w-[160px] shrink-0 sm:w-auto sm:max-w-none"
                 >
                   <motion.div
@@ -109,7 +111,7 @@ export default function Featured() {
                       </div>
                     </div>
                   </motion.div>
-                </Reveal>
+                </div>
               ))}
             </div>
           </div>

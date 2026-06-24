@@ -73,14 +73,11 @@ html.lenis body {
   overflow: hidden;
 }
 
-/* Mobile: pause heavy CSS animations to reduce jank */
+/* Mobile: keep marquee running, spin-x is lightweight enough */
 @media (max-width: 767px) {
   .animate-marquee-y {
     animation-play-state: running;
     will-change: transform;
-  }
-  .animate-spin-x {
-    animation: none;
   }
 }
 

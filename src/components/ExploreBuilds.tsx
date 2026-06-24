@@ -65,7 +65,8 @@ export default function ExploreBuilds() {
             drag="x"
             dragConstraints={{ left: -drag, right: 0 }}
             dragElastic={0.08}
-            className="flex w-max gap-4 sm:gap-5"
+            className="flex w-max gap-3 sm:gap-5"
+            style={{ touchAction: "pan-y" }}
           >
           {projects.map((p) =>
             p.locked ? (
@@ -73,7 +74,7 @@ export default function ExploreBuilds() {
               <div
                 key={p.slug}
                 draggable={false}
-                className="group relative w-[220px] shrink-0 overflow-hidden rounded-3xl bg-ink sm:w-[320px]"
+                className="group relative w-[175px] shrink-0 overflow-hidden rounded-3xl bg-ink sm:w-[320px]"
               >
                 <div className="relative aspect-[4/5]">
                   <Img src={p.image} alt={p.title} />
@@ -136,7 +137,7 @@ export default function ExploreBuilds() {
           <Link
             href="/projects"
             draggable={false}
-            className="flex w-[200px] shrink-0 flex-col items-center justify-center gap-3 rounded-3xl border border-white/25 bg-white/5 p-6 text-center text-white backdrop-blur transition-colors hover:bg-white/10"
+            className="flex w-[150px] shrink-0 flex-col items-center justify-center gap-3 rounded-3xl border border-white/25 bg-white/5 p-5 text-center text-white backdrop-blur transition-colors hover:bg-white/10 sm:w-[200px] sm:p-6"
           >
             <span className="flex h-12 w-12 items-center justify-center rounded-full bg-grad">
               <Icon name="arrow" className="h-6 w-6" />

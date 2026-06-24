@@ -88,7 +88,7 @@ export default function Hero() {
         <div
           ref={ref}
           onMouseMove={onMove}
-          className="relative isolate flex h-[52vw] min-h-[160px] items-center overflow-hidden rounded-[1.75rem] bg-ink [contain:paint] sm:h-auto sm:min-h-[62vh] sm:rounded-[2.5rem]"
+          className="relative isolate flex h-[52vw] min-h-[160px] items-end sm:items-center overflow-hidden rounded-[1.75rem] bg-ink [contain:paint] sm:h-auto sm:min-h-[62vh] sm:rounded-[2.5rem]"
         >
           {/* animated image wall — parallax disabled on mobile */}
           <motion.div
@@ -115,7 +115,7 @@ export default function Hero() {
           {/* content overlay — scroll parallax desktop only */}
           <motion.div
             style={isMobile.current ? undefined : { y: contentY, opacity: contentOpacity }}
-            className="relative w-full px-5 py-4 sm:px-12 sm:py-20 lg:px-16"
+            className="relative w-full px-5 pb-5 pt-4 sm:px-12 sm:py-20 lg:px-16"
           >
             <div className="max-w-2xl text-white">
               {/* badge */}

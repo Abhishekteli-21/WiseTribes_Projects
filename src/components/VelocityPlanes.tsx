@@ -45,15 +45,17 @@ function Row({
   }, [images]);
 
   useAnimationFrame((_t, delta) => {
-    // Skip velocity-linked animation on mobile — too heavy for touch devices
-    if (isMobile.current) return;
     const h = half.current;
     if (!h) return;
     let move = baseVelocity * (delta / 1000);
-    const vf = velFactor.get();
-    if (vf < 0) dir.current = -1;
-    else if (vf > 0) dir.current = 1;
-    move += dir.current * Math.abs(move) * Math.abs(vf);
+
+    // On mobile: base auto-scroll only (no scroll-velocity boost — saves perf)
+    if (!isMobile.current) {
+      const vf = velFactor.get();
+      if (vf < 0) dir.current = -1;
+      else if (vf > 0) dir.current = 1;
+      move += dir.current * Math.abs(move) * Math.abs(vf);
+    }
 
     let nx = baseX.get() + move;
     while (nx <= -h) nx += h;
