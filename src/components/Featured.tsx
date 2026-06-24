@@ -16,9 +16,9 @@ export default function Featured() {
       className="relative scroll-mt-24 overflow-hidden py-8 sm:py-28"
     >
       <Container>
-        <div className="grid items-center gap-6 lg:gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+        <div className="grid grid-cols-1 items-center gap-6 lg:gap-12 lg:grid-cols-[0.9fr_1.1fr]">
           {/* left: pitch + steps */}
-          <div>
+          <div className="min-w-0">
             <Reveal>
               <span className="text-sm font-semibold uppercase tracking-widest text-violet-brand">
                 Get featured
@@ -74,7 +74,7 @@ export default function Featured() {
           {/* right: featured story cards
                Mobile  → horizontal swipe strip (breaks out of container padding)
                Desktop → 3-col grid                                                */}
-          <div className="-mx-5 sm:mx-0">
+          <div className="-mx-5 min-w-0 sm:mx-0">
             <div className="no-scrollbar flex gap-3 overflow-x-auto px-5 pb-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:overflow-visible sm:px-0 sm:pb-0">
               {featured.map((b, i) => (
                 <Reveal

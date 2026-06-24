@@ -7,7 +7,7 @@ import {
   useSpring,
   useTransform,
 } from "motion/react";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import Img from "./ui/Img";
 import GradientButton from "./ui/GradientButton";
 import Icon from "./ui/Icon";
@@ -47,6 +47,7 @@ function Column({
 
 export default function Hero() {
   const ref = useRef<HTMLDivElement>(null);
+  const isMobile = useRef(false);
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
   const x = useSpring(useTransform(mx, [-0.5, 0.5], [18, -18]), {
@@ -58,7 +59,12 @@ export default function Hero() {
     damping: 20,
   });
 
+  useEffect(() => {
+    isMobile.current = window.innerWidth < 768;
+  }, []);
+
   const onMove = (e: React.MouseEvent) => {
+    if (isMobile.current) return;
     const r = ref.current?.getBoundingClientRect();
     if (!r) return;
     mx.set((e.clientX - r.left) / r.width - 0.5);
@@ -75,27 +81,30 @@ export default function Hero() {
   const wallScale = useTransform(sp, [0, 1], [1, 1.14]);
 
   return (
-    <section className="pt-24 sm:px-4 sm:pt-28" id="top">
-      <div className="mx-auto max-w-[88rem]">
+    <section className="overflow-hidden pt-24 sm:px-4 sm:pt-28" id="top">
+      <div className="mx-auto max-w-[88rem] overflow-hidden">
 
         {/* ── Dark image card ── */}
         <div
           ref={ref}
           onMouseMove={onMove}
-          className="relative isolate flex h-[52vw] min-h-[160px] items-center overflow-hidden rounded-b-[1.75rem] bg-ink sm:h-auto sm:min-h-[62vh] sm:rounded-[2.5rem]"
+          className="relative isolate flex h-[52vw] min-h-[160px] items-center overflow-hidden rounded-b-[1.75rem] bg-ink [contain:paint] sm:h-auto sm:min-h-[62vh] sm:rounded-[2.5rem]"
         >
-          {/* animated image wall */}
+          {/* animated image wall — parallax disabled on mobile */}
           <motion.div
-            style={{ x, y, scale: wallScale }}
-            className="pointer-events-none absolute inset-0 -z-10"
+            style={isMobile.current ? undefined : { x, y, scale: wallScale }}
+            className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
           >
             <div className="absolute -inset-[12%] flex -rotate-6 scale-[1.18] items-start justify-center gap-2.5 sm:gap-3">
               <Column images={heroColumns[0]} duration="36s" />
               <Column images={heroColumns[1]} duration="44s" reverse />
               <Column images={heroColumns[2]} duration="32s" />
+              {/* extra columns — desktop only */}
               <Column images={heroColumns[3]} duration="48s" reverse />
-              <Column images={heroColumns[4]} duration="38s" />
-              <Column images={heroColumns[5]} duration="42s" reverse />
+              <div className="hidden sm:contents">
+                <Column images={heroColumns[4]} duration="38s" />
+                <Column images={heroColumns[5]} duration="42s" reverse />
+              </div>
             </div>
           </motion.div>
 
@@ -103,9 +112,9 @@ export default function Hero() {
           <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-black/90 via-black/60 to-black/25" />
           <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-t from-black/70 via-transparent to-black/40" />
 
-          {/* content overlay */}
+          {/* content overlay — scroll parallax desktop only */}
           <motion.div
-            style={{ y: contentY, opacity: contentOpacity }}
+            style={isMobile.current ? undefined : { y: contentY, opacity: contentOpacity }}
             className="relative w-full px-5 py-4 sm:px-12 sm:py-20 lg:px-16"
           >
             <div className="max-w-2xl text-white">

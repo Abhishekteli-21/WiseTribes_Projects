@@ -12,8 +12,6 @@ import {
 import { useEffect, useRef } from "react";
 import Img from "./ui/Img";
 
-/** One row whose drift speed + direction is linked to scroll velocity
- *  (the "scroll-velocity-linked offset" pattern). */
 function Row({
   images,
   baseVelocity,
@@ -25,6 +23,7 @@ function Row({
   const trackRef = useRef<HTMLDivElement>(null);
   const half = useRef(0);
   const dir = useRef(baseVelocity < 0 ? -1 : 1);
+  const isMobile = useRef(false);
 
   const { scrollY } = useScroll();
   const scrollVel = useVelocity(scrollY);
@@ -32,6 +31,7 @@ function Row({
   const velFactor = useTransform(smooth, [0, 1000], [0, 4], { clamp: false });
 
   useEffect(() => {
+    isMobile.current = window.innerWidth < 768;
     const measure = () => {
       if (trackRef.current) half.current = trackRef.current.scrollWidth / 2;
     };
@@ -45,11 +45,11 @@ function Row({
   }, [images]);
 
   useAnimationFrame((_t, delta) => {
+    // Skip velocity-linked animation on mobile — too heavy for touch devices
+    if (isMobile.current) return;
     const h = half.current;
     if (!h) return;
-    // base drift in this row's own direction…
     let move = baseVelocity * (delta / 1000);
-    // …scaled up (and able to flip) by how fast the page is scrolling
     const vf = velFactor.get();
     if (vf < 0) dir.current = -1;
     else if (vf > 0) dir.current = 1;
@@ -72,7 +72,7 @@ function Row({
       {list.map((src, i) => (
         <div
           key={i}
-          className="relative mr-3 h-[150px] w-[230px] shrink-0 overflow-hidden rounded-2xl bg-grad-soft shadow-[0_24px_50px_-28px_rgba(0,0,0,0.8)] ring-1 ring-white/10 sm:mr-4 sm:h-[210px] sm:w-[320px]"
+          className="relative mr-3 h-[120px] w-[180px] shrink-0 overflow-hidden rounded-2xl bg-grad-soft shadow-[0_24px_50px_-28px_rgba(0,0,0,0.8)] ring-1 ring-white/10 sm:mr-4 sm:h-[210px] sm:w-[320px]"
         >
           <Img src={src} alt="" />
           <span className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
