@@ -25,7 +25,7 @@ export default function ExploreBuilds() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden py-12 sm:py-28">
+    <section className="relative overflow-hidden py-8 sm:py-28">
       {/* full-bleed background image + overlay */}
       <div className="absolute inset-0 -z-10">
         <Img
@@ -38,7 +38,7 @@ export default function ExploreBuilds() {
 
       <Container>
         <Reveal>
-          <div className="mb-10 flex flex-col items-start justify-between gap-4 text-white sm:flex-row sm:items-end">
+          <div className="mb-6 flex flex-col items-start justify-between gap-3 text-white sm:mb-10 sm:flex-row sm:items-end sm:gap-4">
             <div>
               <span className="text-sm font-semibold uppercase tracking-widest text-white/70">
                 Explore the builds
@@ -46,20 +46,20 @@ export default function ExploreBuilds() {
               <AnimatedText
                 as="h2"
                 text="Every project has its *own page*"
-                className="mt-2 block max-w-xl font-display text-3xl font-bold leading-[1.08] tracking-tight sm:text-5xl"
+                className="mt-2 block max-w-xl font-display text-2xl font-bold leading-[1.08] tracking-tight sm:text-5xl"
               />
             </div>
             <p className="flex items-center gap-2 text-sm text-white/70">
               <Icon name="arrow" className="h-4 w-4" />
-              Drag to browse · tap to open
+              Swipe to browse · tap to open
             </p>
           </div>
         </Reveal>
 
-        {/* draggable gallery */}
-        <motion.div
+        {/* draggable gallery — native scroll on mobile, drag on desktop */}
+        <div
           ref={track}
-          className="no-scrollbar cursor-grab overflow-hidden active:cursor-grabbing"
+          className="no-scrollbar overflow-x-auto sm:cursor-grab sm:overflow-hidden sm:active:cursor-grabbing"
         >
           <motion.div
             drag="x"
@@ -146,7 +146,7 @@ export default function ExploreBuilds() {
             </span>
           </Link>
           </motion.div>
-        </motion.div>
+        </div>
       </Container>
     </section>
   );

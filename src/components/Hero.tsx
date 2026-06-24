@@ -208,7 +208,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="px-5 pb-2 pt-5 sm:hidden"
+          className="px-5 pb-1 pt-4 sm:hidden"
         >
           <p className="text-[0.95rem] leading-relaxed text-muted">
             Managed by curiosity, built by you. WiseTribes turns the reels

@@ -7,7 +7,7 @@ const TEXT = PHRASE.repeat(8);
 export default function RibbonBand() {
   return (
     <section
-      className="relative my-12 overflow-hidden border-y border-line bg-grad-soft sm:my-16"
+      className="relative my-6 overflow-hidden border-y border-line bg-grad-soft sm:my-16"
       aria-hidden
     >
       <svg viewBox="0 0 1920 190" className="block w-full">

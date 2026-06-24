@@ -13,10 +13,10 @@ export default function Featured() {
   return (
     <section
       id="featured"
-      className="relative scroll-mt-24 overflow-hidden py-12 sm:py-28"
+      className="relative scroll-mt-24 overflow-hidden py-8 sm:py-28"
     >
       <Container>
-        <div className="grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+        <div className="grid items-center gap-6 lg:gap-12 lg:grid-cols-[0.9fr_1.1fr]">
           {/* left: pitch + steps */}
           <div>
             <Reveal>
@@ -27,34 +27,34 @@ export default function Featured() {
             <AnimatedText
               as="h2"
               text="Build it. Post it."
-              className="mt-2 block font-display text-3xl font-bold leading-[1.05] tracking-tight sm:text-5xl"
+              className="mt-2 block font-display text-2xl font-bold leading-[1.05] tracking-tight sm:text-5xl"
             />
             <AnimatedText
               as="h2"
               text="*Get featured.*"
               delay={0.25}
-              className="block font-display text-3xl font-bold leading-[1.05] tracking-tight sm:text-5xl"
+              className="block font-display text-2xl font-bold leading-[1.05] tracking-tight sm:text-5xl"
             />
             <Reveal delay={0.2}>
-              <p className="mt-4 max-w-md text-lg text-muted">
+              <p className="mt-3 max-w-md text-base text-muted sm:mt-4 sm:text-lg">
                 Made something from a WiseTribes project? Record it, post it, and
                 tag us. We feature the best builds on our website and in our
                 Instagram stories — every single week.
               </p>
             </Reveal>
 
-            <div className="mt-8 space-y-3">
+            <div className="mt-5 space-y-2 sm:mt-8 sm:space-y-3">
               {featureSteps.map((s, i) => (
                 <Reveal key={s.n} delay={i * 0.08}>
-                  <div className="flex items-center gap-4 rounded-2xl border border-line bg-white/70 p-3 backdrop-blur">
-                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-grad font-display text-sm font-bold text-white">
+                  <div className="flex items-center gap-3 rounded-2xl border border-line bg-white/70 p-2.5 backdrop-blur sm:gap-4 sm:p-3">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-grad font-display text-sm font-bold text-white sm:h-11 sm:w-11">
                       {s.n}
                     </span>
                     <div>
-                      <p className="font-display font-semibold tracking-tight">
+                      <p className="font-display text-sm font-semibold tracking-tight sm:text-base">
                         {s.title}
                       </p>
-                      <p className="text-sm text-muted">{s.body}</p>
+                      <p className="text-xs text-muted sm:text-sm">{s.body}</p>
                     </div>
                   </div>
                 </Reveal>
@@ -62,7 +62,7 @@ export default function Featured() {
             </div>
 
             <Reveal delay={0.2}>
-              <div className="mt-8">
+              <div className="mt-5 sm:mt-8">
                 <GradientButton href={site.instagram} external size="lg">
                   <Icon name="instagram" className="h-4 w-4" />
                   Tag {site.instagramHandle}

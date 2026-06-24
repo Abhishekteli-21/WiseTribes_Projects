@@ -8,7 +8,7 @@ import { galleryImages } from "@/lib/content";
 
 export default function TribeGallery() {
   return (
-    <section className="relative overflow-hidden bg-[#0a0e1a] py-12 text-white sm:py-28">
+    <section className="relative overflow-hidden bg-[#0a0e1a] py-10 text-white sm:py-28">
       {/* soft brand glow */}
       <div className="pointer-events-none absolute inset-0 opacity-50">
         <div className="absolute left-1/4 top-0 h-72 w-72 rounded-full bg-violet-brand/20 blur-3xl" />
@@ -16,7 +16,7 @@ export default function TribeGallery() {
       </div>
 
       <Container className="relative">
-        <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+        <div className="flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-end sm:gap-4">
           <div>
             <span className="text-sm font-semibold uppercase tracking-widest text-white/50">
               Inside the tribe
@@ -24,7 +24,7 @@ export default function TribeGallery() {
             <AnimatedText
               as="h2"
               text="Real kids. *Real builds.*"
-              className="mt-2 block font-display text-3xl font-bold tracking-tight sm:text-5xl"
+              className="mt-2 block font-display text-2xl font-bold tracking-tight sm:text-5xl"
             />
           </div>
           <span className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-white/50">

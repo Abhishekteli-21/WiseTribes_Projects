@@ -28,9 +28,9 @@ export default function Footer() {
             <AnimatedText
               as="h2"
               text="The sky was never *the limit.*"
-              className="block font-display text-3xl font-bold leading-[1.02] tracking-tight sm:text-6xl"
+              className="block font-display text-2xl font-bold leading-[1.02] tracking-tight sm:text-6xl"
             />
-            <p className="mt-5 max-w-xl text-lg leading-relaxed text-white/65">
+            <p className="mt-3 max-w-xl text-base leading-relaxed text-white/65 sm:mt-5 sm:text-lg">
               It&apos;s just the beginning. Join a tribe of young makers learning
               AI, building real projects, and proving that{" "}
               <span className="font-semibold text-white">

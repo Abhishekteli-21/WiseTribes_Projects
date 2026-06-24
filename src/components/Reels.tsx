@@ -36,7 +36,7 @@ export default function Reels() {
   return (
     <section id="reels" className="overflow-hidden bg-white py-10 sm:py-24">
       <Container>
-        <div className="mb-10 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+        <div className="mb-6 flex flex-col items-start justify-between gap-3 sm:mb-10 sm:flex-row sm:items-end sm:gap-4">
           <div>
             <span className="text-sm font-semibold uppercase tracking-widest text-violet-brand">
               The reels
@@ -44,7 +44,7 @@ export default function Reels() {
             <AnimatedText
               as="h2"
               text="The reels that started it *all*"
-              className="mt-2 block max-w-xl font-display text-3xl font-bold leading-[1.08] tracking-tight sm:text-5xl"
+              className="mt-2 block max-w-xl font-display text-2xl font-bold leading-[1.08] tracking-tight sm:text-5xl"
             />
           </div>
           <div className="flex items-center gap-3">
