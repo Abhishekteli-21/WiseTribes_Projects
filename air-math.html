@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Air Math — WiseTribes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{ --grad:linear-gradient(100deg,#6366f1,#a855f7 50%,#ec4899); }
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Fredoka',system-ui,sans-serif}
+  body{min-height:100vh;color:#fff;overflow-x:hidden;
+    background:radial-gradient(1200px 800px at 20% 0%,#1e1b4b,#0a0a16 60%);
+    display:flex;flex-direction:column;align-items:center;}
+  h1{font-size:clamp(28px,5vw,52px);font-weight:700;margin-top:24px;letter-spacing:-.02em}
+  h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{color:#a9a9c2;margin-top:4px;font-size:15px}
+
+  .equation{display:flex;align-items:center;justify-content:center;gap:18px;margin:22px 0 8px;flex-wrap:wrap}
+  .num{min-width:96px;height:120px;display:grid;place-items:center;border-radius:24px;
+    background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.12);
+    font-size:84px;font-weight:700;line-height:1}
+  .num.live{background:var(--grad);box-shadow:0 18px 50px -18px rgba(168,85,247,.7)}
+  .op,.eq{font-size:60px;font-weight:700;color:#c9c9e6}
+  .answer{font-size:96px;font-weight:700;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;min-width:120px;text-align:center}
+
+  .toggle{display:flex;gap:10px;margin:6px 0 18px}
+  .toggle button{font-size:24px;font-weight:700;width:64px;height:48px;border:none;border-radius:14px;
+    background:rgba(255,255,255,.1);color:#fff;cursor:pointer;transition:.2s}
+  .toggle button.active{background:var(--grad);transform:scale(1.05)}
+
+  .stage{position:relative;width:min(92vw,720px);aspect-ratio:4/3;border-radius:28px;overflow:hidden;
+    border:3px solid rgba(255,255,255,.12);box-shadow:0 40px 90px -40px rgba(0,0,0,.8);background:#000}
+  video{display:none}
+  canvas{width:100%;height:100%;object-fit:cover;transform:scaleX(-1)}
+  .hint{position:absolute;left:0;right:0;bottom:14px;text-align:center;font-size:15px;color:#fff;
+    text-shadow:0 2px 8px rgba(0,0,0,.8);pointer-events:none}
+
+  .start{position:absolute;inset:0;display:grid;place-items:center;background:rgba(10,10,22,.85);backdrop-filter:blur(4px);z-index:5}
+  .start button{font-size:20px;font-weight:700;padding:16px 32px;border:none;border-radius:999px;
+    background:var(--grad);color:#fff;cursor:pointer;box-shadow:0 18px 50px -18px rgba(236,72,153,.7)}
+  .start p{margin-top:14px;color:#b9b9d2;font-size:14px}
+
+  footer{margin:26px 0 30px;font-size:14px;color:#8a8aa6}
+  footer a{color:#c9b6ff;text-decoration:none;font-weight:600}
+</style>
+</head>
+<body>
+  <h1>✋ <span class="g">Air Math</span> 🖐️</h1>
+  <p class="sub">Show fingers on each hand — the AI counts and solves it!</p>
+
+  <div class="equation">
+    <div class="num" id="left">0</div>
+    <div class="op" id="op">+</div>
+    <div class="num" id="right">0</div>
+    <div class="eq">=</div>
+    <div class="answer" id="answer">0</div>
+  </div>
+
+  <div class="toggle">
+    <button id="add" class="active">+</button>
+    <button id="mul">×</button>
+  </div>
+
+  <div class="stage">
+    <video id="video" playsinline></video>
+    <canvas id="canvas"></canvas>
+    <div class="hint">Hold up your fingers ✨</div>
+    <div class="start" id="startScreen">
+      <div style="text-align:center">
+        <button id="startBtn">▶ Start camera</button>
+        <p>Allow camera access, then show your hands</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>Built with <a href="https://wisetribes.io/" target="_blank" rel="noopener">WiseTribes</a></footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+  <script>
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const leftEl = document.getElementById('left');
+    const rightEl = document.getElementById('right');
+    const opEl = document.getElementById('op');
+    const answerEl = document.getElementById('answer');
+
+    let op = '+';
+    document.getElementById('add').onclick = () => setOp('+');
+    document.getElementById('mul').onclick = () => setOp('*');
+    function setOp(o){
+      op = o; opEl.textContent = o === '+' ? '+' : '×';
+      document.getElementById('add').classList.toggle('active', o==='+');
+      document.getElementById('mul').classList.toggle('active', o==='*');
+      update();
+    }
+
+    // ---- pop sound ----
+    let audioCtx;
+    function pop(){
+      try{
+        audioCtx = audioCtx || new (window.AudioContext||window.webkitAudioContext)();
+        const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+        o.type='triangle'; o.frequency.setValueAtTime(520, audioCtx.currentTime);
+        o.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime+0.08);
+        g.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.25, audioCtx.currentTime+0.01);
+        g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime+0.18);
+        o.connect(g).connect(audioCtx.destination);
+        o.start(); o.stop(audioCtx.currentTime+0.2);
+      }catch(e){}
+    }
+
+    // ---- finger counting ----
+    function dist(a,b){ return Math.hypot(a.x-b.x, a.y-b.y); }
+    function fingersUp(lm){
+      let c = 0;
+      // four fingers: tip clearly above its lower joint
+      [[8,6],[12,10],[16,14],[20,18]].forEach(([t,p])=>{ if(lm[t].y < lm[p].y - 0.02) c++; });
+      // thumb: tip sticks out from the index knuckle more than the thumb knuckle does
+      if (dist(lm[4],lm[5]) > dist(lm[2],lm[5]) * 1.1) c++;
+      return c;
+    }
+
+    // ---- smoothing (mode of last frames) ----
+    function makeSmoother(){
+      const buf = [];
+      return (v)=>{
+        buf.push(v); if(buf.length>6) buf.shift();
+        const counts={}; let best=v, bestN=0;
+        buf.forEach(x=>{ counts[x]=(counts[x]||0)+1; if(counts[x]>bestN){bestN=counts[x];best=x;} });
+        return best;
+      };
+    }
+    const smL = makeSmoother(), smR = makeSmoother();
+
+    let L = 0, R = 0, lastAnswer = null;
+    function update(){
+      leftEl.textContent = L; rightEl.textContent = R;
+      const ans = op==='+' ? L+R : L*R;
+      answerEl.textContent = ans;
+      if (ans !== lastAnswer){ lastAnswer = ans; pop(); }
+    }
+
+    function onResults(results){
+      canvas.width = video.videoWidth || 640;
+      canvas.height = video.videoHeight || 480;
+      ctx.save();
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      ctx.drawImage(results.image, 0, 0, canvas.width, canvas.height);
+
+      const hands = results.multiHandLandmarks || [];
+      // sort by on-screen position (video is mirrored, so use 1 - wristX)
+      const ordered = hands
+        .map(lm => ({ lm, screenX: 1 - lm[0].x, n: fingersUp(lm) }))
+        .sort((a,b)=> a.screenX - b.screenX);
+
+      ordered.forEach(h=>{
+        drawConnectors(ctx, h.lm, HAND_CONNECTIONS, {color:'#ffffff', lineWidth:3});
+        drawLandmarks(ctx, h.lm, {color:'#ec4899', lineWidth:1, radius:4});
+      });
+      ctx.restore();
+
+      const rawL = ordered[0] ? ordered[0].n : 0;
+      const rawR = ordered[1] ? ordered[1].n : 0;
+      L = smL(rawL); R = smR(rawR);
+      leftEl.classList.toggle('live', !!ordered[0]);
+      rightEl.classList.toggle('live', !!ordered[1]);
+      update();
+    }
+
+    const handsModel = new Hands({ locateFile:(f)=>`https://cdn.jsdelivr.net/npm/@mediapipe/hands/${f}` });
+    handsModel.setOptions({ maxNumHands:2, modelComplexity:1, minDetectionConfidence:0.6, minTrackingConfidence:0.6 });
+    handsModel.onResults(onResults);
+
+    document.getElementById('startBtn').onclick = async () => {
+      try{ audioCtx = audioCtx || new (window.AudioContext||window.webkitAudioContext)(); audioCtx.resume(); }catch(e){}
+      document.getElementById('startScreen').style.display='none';
+      const camera = new Camera(video, {
+        onFrame: async () => { await handsModel.send({ image: video }); },
+        width: 960, height: 720,
+      });
+      camera.start();
+    };
+  </script>
+</body>
+</html>

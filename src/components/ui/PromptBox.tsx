@@ -62,6 +62,28 @@ export default function PromptBox({ prompt }: { prompt: string }) {
           Tip: paste this into Claude, download the file it makes, then drop it
           on Netlify to go live. ✨
         </p>
+
+        {/* quick links to the two tools */}
+        <div className="mt-4 flex flex-wrap gap-2">
+          <a
+            href="https://claude.ai/new"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-full bg-grad px-4 py-2 text-sm font-semibold text-white transition-transform hover:scale-105 active:scale-95"
+          >
+            Open Claude
+            <Icon name="arrow" className="h-3.5 w-3.5" />
+          </a>
+          <a
+            href="https://app.netlify.com/drop"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-full border border-line bg-white px-4 py-2 text-sm font-semibold text-ink transition-colors hover:bg-surface"
+          >
+            Open Netlify
+            <Icon name="arrow" className="h-3.5 w-3.5" />
+          </a>
+        </div>
       </div>
     </div>
   );

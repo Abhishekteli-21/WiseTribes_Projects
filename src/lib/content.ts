@@ -113,27 +113,27 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    slug: "ai-air-drawing",
-    title: "Build an AI Air-Drawing App",
+    slug: "air-math",
+    title: "Solve Maths Just by Showing Your Hands",
     blurb:
-      "Draw in the air with just your finger! Your webcam plus AI hand-tracking turn your hand into a glowing neon paintbrush — no mouse, no pen.",
-    category: "Computer Vision",
+      "No pen, no keyboard — just your hands! Hold up your fingers and an AI counts them and does the maths with you, live on your webcam. Maths just became a game.",
+    category: "Computer Vision · Maths",
     difficulty: "Beginner",
-    duration: "Under 10 min",
+    duration: "Under 5 min",
     youtubeId: "aircAruvnKk",
     image: "/images/projects/coding-dark-laptop.png",
     prompt:
-      "Create a single, self-contained HTML file — an AI Air-Drawing App for WiseTribes.\n\n" +
-      "Use MediaPipe Hands to track my index finger from the webcam and draw a glowing neon trail on a dark canvas. " +
-      "Gestures: one finger = draw, open palm = erase, closed fist = pause. " +
-      "Add a colour picker and a brush-thickness slider.\n\n" +
-      "Make the UI clean, colourful and kid-friendly. At the bottom, add a small footer that says " +
-      '"Built with WiseTribes" linking to https://wisetribes.io/.',
+      'Create a single, self-contained HTML file — an "Air Math" game for WiseTribes.\n\n' +
+      "Use MediaPipe Hands (from CDN) to detect both hands from the webcam and count how many fingers are raised on each hand. " +
+      "Show a big, kid-friendly display: left number + right number = answer, updating live. " +
+      "Add a toggle for + and ×, big colourful fonts, a fun pop sound on each new answer, a dark playful background, " +
+      "and the webcam with the hand landmarks drawn on top.\n\n" +
+      'At the bottom add a small footer that says "Built with WiseTribes" linking to https://wisetribes.io/.',
     steps: [
       { title: "Copy the prompt", body: "Hit the copy button on the prompt right here on this page." },
       { title: "Paste into Claude", body: "Paste it into Claude and let it write the whole app for you." },
       { title: "Download the file", body: "Download the single HTML file Claude gives you — one click." },
-      { title: "Go live on Netlify", body: "Drag-and-drop it into Netlify, open your link, and draw in the air!" },
+      { title: "Go live on Netlify", body: "Drag-and-drop it into Netlify, open your link, and do maths in the air!" },
     ],
   },
 ];
