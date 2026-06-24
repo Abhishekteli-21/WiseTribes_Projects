@@ -67,41 +67,70 @@ export default function ExploreBuilds() {
             dragElastic={0.08}
             className="flex w-max gap-4 sm:gap-5"
           >
-          {projects.map((p) => (
-            <Link
-              key={p.slug}
-              href={`/projects/${p.slug}`}
-              draggable={false}
-              className="group relative block w-[220px] shrink-0 overflow-hidden rounded-3xl bg-ink sm:w-[320px]"
-            >
-              <div className="relative aspect-[4/5]">
-                <Img src={p.image} alt={p.title} />
-                <span className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-black/10 transition-opacity group-hover:from-black/90" />
+          {projects.map((p) =>
+            p.locked ? (
+              /* locked / coming-soon card */
+              <div
+                key={p.slug}
+                draggable={false}
+                className="group relative w-[220px] shrink-0 overflow-hidden rounded-3xl bg-ink sm:w-[320px]"
+              >
+                <div className="relative aspect-[4/5]">
+                  <Img src={p.image} alt={p.title} />
+                  <span className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
 
-                <span className="absolute left-3 top-3 rounded-full bg-white/90 px-2.5 py-1 text-xs font-semibold text-ink backdrop-blur">
-                  {p.difficulty} · {p.duration}
-                </span>
-
-                <div className="absolute inset-x-0 bottom-0 p-4 text-white">
-                  <p className="text-xs uppercase tracking-widest text-white/60">
-                    {p.category}
-                  </p>
-                  <h3 className="mt-1 font-display text-xl font-bold leading-tight tracking-tight">
-                    {p.title}
-                  </h3>
-                  <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-white">
-                    <span className="bg-grad bg-clip-text text-transparent">
-                      Open the build
+                  {/* lock badge */}
+                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 p-4 text-center">
+                    <span className="flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-2xl ring-1 ring-white/20">
+                      🔒
                     </span>
-                    <Icon
-                      name="arrow"
-                      className="h-4 w-4 text-pink-brand transition-transform group-hover:translate-x-1"
-                    />
-                  </span>
+                    <p className="font-display text-sm font-bold text-white/90">
+                      Coming soon
+                    </p>
+                    <p className="text-xs text-white/55">{p.category}</p>
+                    <p className="text-xs font-semibold text-white/70 leading-snug">
+                      {p.title}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </Link>
-          ))}
+            ) : (
+              /* live project card */
+              <Link
+                key={p.slug}
+                href={`/projects/${p.slug}`}
+                draggable={false}
+                className="group relative block w-[220px] shrink-0 overflow-hidden rounded-3xl bg-ink sm:w-[320px]"
+              >
+                <div className="relative aspect-[4/5]">
+                  <Img src={p.image} alt={p.title} />
+                  <span className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-black/10 transition-opacity group-hover:from-black/90" />
+
+                  <span className="absolute left-3 top-3 rounded-full bg-white/90 px-2.5 py-1 text-xs font-semibold text-ink backdrop-blur">
+                    {p.difficulty} · {p.duration}
+                  </span>
+
+                  <div className="absolute inset-x-0 bottom-0 p-4 text-white">
+                    <p className="text-xs uppercase tracking-widest text-white/60">
+                      {p.category}
+                    </p>
+                    <h3 className="mt-1 font-display text-xl font-bold leading-tight tracking-tight">
+                      {p.title}
+                    </h3>
+                    <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-white">
+                      <span className="bg-grad bg-clip-text text-transparent">
+                        Open the build
+                      </span>
+                      <Icon
+                        name="arrow"
+                        className="h-4 w-4 text-pink-brand transition-transform group-hover:translate-x-1"
+                      />
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            )
+          )}
 
           {/* tail CTA card */}
           <Link

@@ -39,40 +39,69 @@ export default function ProjectsIndex() {
           </Reveal>
 
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {projects.map((p, i) => (
-              <Reveal key={p.slug} delay={i * 0.05}>
-                <Link
-                  href={`/projects/${p.slug}`}
-                  className="group block overflow-hidden rounded-3xl border border-line bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_60px_-30px_rgba(139,92,246,0.5)]"
-                >
-                  <div className="relative aspect-[16/11] overflow-hidden">
-                    <Img src={p.image} alt={p.title} />
-                    <span className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                    <span className="absolute left-3 top-3 rounded-full bg-white/90 px-2.5 py-1 text-xs font-semibold text-ink backdrop-blur">
-                      {p.difficulty} · {p.duration}
-                    </span>
+            {projects.map((p, i) =>
+              p.locked ? (
+                /* ── Coming-soon locked card ── */
+                <Reveal key={p.slug} delay={i * 0.05}>
+                  <div className="group relative block overflow-hidden rounded-3xl border border-line bg-white">
+                    <div className="relative aspect-[16/11] overflow-hidden">
+                      <Img src={p.image} alt={p.title} />
+                      {/* heavy blur + dark scrim to hide the image */}
+                      <span className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+                      {/* Coming Soon badge */}
+                      <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-2 rounded-full bg-white/95 px-4 py-2 text-sm font-bold text-ink shadow-lg">
+                        🔒 More projects coming soon
+                      </span>
+                    </div>
+                    <div className="p-5 opacity-40">
+                      <p className="text-xs uppercase tracking-widest text-violet-brand">
+                        {p.category}
+                      </p>
+                      <h2 className="mt-1 font-display text-xl font-bold tracking-tight">
+                        {p.title}
+                      </h2>
+                      <p className="mt-2 line-clamp-2 text-sm text-muted">
+                        {p.blurb}
+                      </p>
+                    </div>
                   </div>
-                  <div className="p-5">
-                    <p className="text-xs uppercase tracking-widest text-violet-brand">
-                      {p.category}
-                    </p>
-                    <h2 className="mt-1 font-display text-xl font-bold tracking-tight">
-                      {p.title}
-                    </h2>
-                    <p className="mt-2 line-clamp-2 text-sm text-muted">
-                      {p.blurb}
-                    </p>
-                    <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-ink">
-                      Open the build
-                      <Icon
-                        name="arrow"
-                        className="h-4 w-4 text-pink-brand transition-transform group-hover:translate-x-1"
-                      />
-                    </span>
-                  </div>
-                </Link>
-              </Reveal>
-            ))}
+                </Reveal>
+              ) : (
+                /* ── Live project card ── */
+                <Reveal key={p.slug} delay={i * 0.05}>
+                  <Link
+                    href={`/projects/${p.slug}`}
+                    className="group block overflow-hidden rounded-3xl border border-line bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_60px_-30px_rgba(139,92,246,0.5)]"
+                  >
+                    <div className="relative aspect-[16/11] overflow-hidden">
+                      <Img src={p.image} alt={p.title} />
+                      <span className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                      <span className="absolute left-3 top-3 rounded-full bg-white/90 px-2.5 py-1 text-xs font-semibold text-ink backdrop-blur">
+                        {p.difficulty} · {p.duration}
+                      </span>
+                    </div>
+                    <div className="p-5">
+                      <p className="text-xs uppercase tracking-widest text-violet-brand">
+                        {p.category}
+                      </p>
+                      <h2 className="mt-1 font-display text-xl font-bold tracking-tight">
+                        {p.title}
+                      </h2>
+                      <p className="mt-2 line-clamp-2 text-sm text-muted">
+                        {p.blurb}
+                      </p>
+                      <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-ink">
+                        Open the build
+                        <Icon
+                          name="arrow"
+                          className="h-4 w-4 text-pink-brand transition-transform group-hover:translate-x-1"
+                        />
+                      </span>
+                    </div>
+                  </Link>
+                </Reveal>
+              )
+            )}
           </div>
         </Container>
       </main>

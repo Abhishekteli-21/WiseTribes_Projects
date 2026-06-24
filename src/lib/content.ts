@@ -109,6 +109,7 @@ export type Project = {
   /** The prompt the kid copies and pastes into Claude. */
   prompt: string;
   steps: { title: string; body: string }[];
+  locked?: boolean;
 };
 
 export const projects: Project[] = [
@@ -135,6 +136,48 @@ export const projects: Project[] = [
       { title: "Download the file", body: "Download the single HTML file Claude gives you — one click." },
       { title: "Go live on Netlify", body: "Drag-and-drop it into Netlify, open your link, and do maths in the air!" },
     ],
+  },
+  {
+    slug: "ai-emotion-reader",
+    title: "Build an AI Emotion Reader",
+    blurb:
+      "Point your webcam at your face and watch AI read your mood in real-time — happy, surprised, angry, calm. Pure computer-vision magic, no code libraries needed.",
+    category: "Computer Vision",
+    difficulty: "Beginner",
+    duration: "Under 15 min",
+    youtubeId: "",
+    image: "/images/hero-wall/girl-ai-generator.png",
+    prompt: "",
+    steps: [],
+    locked: true,
+  },
+  {
+    slug: "ai-chatbot",
+    title: "Create Your Own AI Chatbot",
+    blurb:
+      "Build a chatbot with a name, a personality, and a purpose — then share the link with your friends and watch them talk to your creation.",
+    category: "NLP · Chatbots",
+    difficulty: "Beginner",
+    duration: "Under 10 min",
+    youtubeId: "",
+    image: "/images/hero-wall/boy-blue-screen.png",
+    prompt: "",
+    steps: [],
+    locked: true,
+  },
+  {
+    slug: "ai-art-generator",
+    title: "AI Art from Your Words",
+    blurb:
+      "Type a sentence and watch AI turn it into a painting. Landscapes, cartoon characters, abstract art — your words become the brush.",
+    category: "Generative AI",
+    difficulty: "Beginner",
+    duration: "Under 5 min",
+    youtubeId: "",
+    image: "/images/featured/diya.png",
+    prompt: "",
+    steps: [],
+    locked: true,
   },
 ];
 
