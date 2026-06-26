@@ -122,7 +122,7 @@ export const projects: Project[] = [
     difficulty: "Beginner",
     duration: "Under 5 min",
     youtubeId: "1_lZLYUAFKU",
-    image: "/images/projects/coding-dark-laptop.png",
+    image: "https://i.ytimg.com/vi/1_lZLYUAFKU/maxresdefault.jpg",
     prompt:
       'Create a single, self-contained HTML file — an "Air Math" game for WiseTribes.\n\n' +
       "Use MediaPipe Hands (from CDN) to detect both hands from the webcam and count how many fingers are raised on each hand. " +
