@@ -121,7 +121,7 @@ export const projects: Project[] = [
     category: "Computer Vision · Maths",
     difficulty: "Beginner",
     duration: "Under 5 min",
-    youtubeId: "aircAruvnKk",
+    youtubeId: "1_lZLYUAFKU",
     image: "/images/projects/coding-dark-laptop.png",
     prompt:
       'Create a single, self-contained HTML file — an "Air Math" game for WiseTribes.\n\n' +
